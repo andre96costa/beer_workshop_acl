@@ -41,5 +41,11 @@ class AppServiceProvider extends ServiceProvider
         // Gate::define('delete-role', function($user){
         //     return  $user->role_id == RoleEnum::PROFESSOR || $user->role_id == RoleEnum::SECRETARY || $user->role_id == RoleEnum::ADMIN;
         // });
+
+        Gate::before(function($user, $ability) {
+            if ($user->role_id == RoleEnum::ADMIN) {
+                return true;
+            }
+        });
     }
 }
