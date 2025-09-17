@@ -15,7 +15,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        Gate::authorize('access-role');
+        //Gate::authorize('access-role'); direto com gates
+        Gate::authorize('viewAny', Role::class); // com policys
         return view('role.index')
             ->with('roles', Role::all());
     }
@@ -25,7 +26,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        Gate::authorize('create-role');
+        //Gate::authorize('create-role'); direto com gates
+        Gate::authorize('create', Role::class); // com policys
         return view('role.create');
     }
 
@@ -34,7 +36,8 @@ class RoleController extends Controller
      */
     public function store(RoleStoreRequest $request)
     {
-        Gate::authorize('create-role');
+        //Gate::authorize('create-role'); direto com gates
+        Gate::authorize('create', Role::class); // com policys
         Role::create($request->validated());
         return redirect(route('role.index'));
     }
@@ -44,7 +47,8 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        Gate::authorize('edit-role');
+        //Gate::authorize('edit-role'); direto com gates
+        Gate::authorize('view', $role); // com policys
         return view('role.show')
             ->with('role', $role);
     }
@@ -54,7 +58,8 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        Gate::authorize('edit-role');
+        //Gate::authorize('edit-role'); direto com gates
+        Gate::authorize('view', $role); // com policys
         return view('role.edit')
             ->with('role', $role);
     }
@@ -64,7 +69,8 @@ class RoleController extends Controller
      */
     public function update(RoleUpdateRequest $request, Role $role)
     {
-        Gate::authorize('update-role');
+        //Gate::authorize('update-role'); direto com gates
+        Gate::authorize('update', $role); // com policys
         $role->update($request->validated());
         return redirect(route('role.index'));
     }
@@ -74,7 +80,8 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        Gate::authorize('delete-role');
+        //Gate::authorize('delete-role'); direto com gates
+        Gate::authorize('delete', $role); // com policys
         if ($role->users->count() > 0) {
 
             dd("remova os usuarios primeiro");

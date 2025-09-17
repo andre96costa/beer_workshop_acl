@@ -20,7 +20,7 @@
                         Home
                     </a>
                 </li>
-                @can('access-role')
+                @can('viewAny', App\Models\Role::class)
                     <li>
                         <a href="{{ route('role.index') }}"
                             @class([
